@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 10;
+  }
+
+  h1 { margin-bottom: 10px; }
+  p { color: #ff4d6d; margin-bottom: 30px; }
+
+  button {
+    font-size: 18px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  #yes {
+    background: #ff4d6d;
+    color: white;
+    margin-right: 20px;
+  }
+
+  #no {
+    background: #adb5bd;
+    color: white;
+    position: absolute;
+  }
+
+  #monkey {
+    display: none;
+    margin-top: 25px;
+  }
+
+  /* ❤️ Hearts */
+  .heart {
+    position: fixed;
+    font-size: 28px;
+    animation: fly 2s ease-out forwards;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  @keyframes fly {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2) translateY(-200px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Samir, will you be my Valentine? 💕</h1>
+  <p>From this moment on… it’s always you ❤️</p>
+
+  <button id="yes">Yes ❤️</button>
+  <button id="no">No ❌</button>
+
+  <div id="monkey">
+    <h2>YEEEEES 🎉🐒</h2>
+    <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" width="200">
+  </div>
+
+  <!-- musique injectée ici -->
+  <div id="music"></div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const monkey = document.getElementById("monkey");
+  const musicDiv = document.getElementById("music");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  function explodeHearts() {
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 2000);
+    }
+  }
+
+  yesBtn.addEventListener("click", () => {
+    monkey.style.display = "block";
+    explodeHearts();
+
+    musicDiv.innerHTML = `
+      <iframe width="300" height="170"
+        src="https://www.youtube.com/embed/7z8x2jvQF5E?autoplay=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+    `;
+
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
